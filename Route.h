@@ -17,6 +17,8 @@ class Route
 public:
 	Route();
 	~Route();
+	std::string GetDriver() { return driver; }
+	Route& operator=(const std::string& s) { driver = s; return*this; }
 	size_t GetNumberOfRoute()const { return numberOfRoute; }
 	friend vector<Route> Collect(vector<vector<string>> Bus);
 	Route(std::pair<size_t, string> Bus_, string driver_, size_t numberOfRoute_) : Bus(Bus_), driver(driver_), numberOfRoute(numberOfRoute_) {};
@@ -117,4 +119,25 @@ void ListOfBusesByRout(std::multimap<size_t, Route> container, int rout)
 void DeleteByRout(std::multimap<size_t, Route> &container,const int rout)
 {
 	container.erase(rout);
+}
+void ReplaceDriverOnTheRoute(std::vector<Route>&v, size_t route, std::string driver, const std::string &newdriver)
+{
+	std::replace_if(v.begin(), v.end(), [route, driver](Route& obj) {if (obj.GetNumberOfRoute() == route && obj.GetDriver() == driver) { return 1; }}, newdriver);
+}
+size_t MaxBusesOnRoute(std::vector<Route>r)
+{
+	std::sort(r.begin(), r.end(), [](Route& obj1,Route& obj2) 
+	{return obj1.GetNumberOfRoute() <= obj2.GetNumberOfRoute(); });
+	std::multimap<size_t, size_t>map;
+	int count=0,number;
+	std::transform(r.begin(), r.end(),
+		std::inserter(map, map.begin()), [ &count  ](Route& obj)
+	    {
+		number = obj.GetNumberOfRoute();
+		if ()
+		{
+
+		}
+	    }
+	);
 }

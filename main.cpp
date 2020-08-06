@@ -16,12 +16,10 @@ int main()
 	ReadData("Text.txt");
 	vector<Route> Routes;
 	Routes = Collect(BusRoutes);
-	/*std::multimap<size_t,Route>*/std::multimap<size_t,Route> container = CreateMap(Routes);
-	std::copy(container.begin(), container.end(), std::ostream_iterator<std::pair<size_t, Route>>(cout, "\n"));
-
-	DeleteByRout(container, 40);
+	/*std::multimap<size_t,Route>*//*std::multimap<size_t,Route> container = CreateMap(Routes);*/
+	ReplaceDriverOnTheRoute(Routes, 40, "Петров", "Петрович");
 	std::cout << "-----------------------------------------"<<std::endl;
-	std::copy(container.begin(), container.end(), std::ostream_iterator<std::pair<size_t, Route>>(cout,"\n"));
+	std::copy(Routes.begin(), Routes.end(), std::ostream_iterator<Route>(cout,"\n"));
 
 	///*std::copy(BusRoutes.begin(), BusRoutes.end(), std::ostream_iterator <vector<string>>(cout, "\n"));*/
 	//for (size_t i = 0; i < BusRoutes.size(); i++)

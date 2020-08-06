@@ -97,33 +97,24 @@ std::set<size_t>ListOfRouts( std::vector<Route>&vector)
 	return result;
 }
 
-
-multimap<int, string> nums = {
-  { 1, "адзін" },
-  { 1, "один" },
-  { 1, "one" },
-  { 2, "два" },
-  { 2, "two" },
-  { 3, "тры" },
-  { 3, "три" },
-  { 3, "three" },
-  { 4, "чатыры" },
-  { 4, "четыре" },
-  { 4, "four" } };
-
-//it - встроенный в multimap итератор
-multimap<int, string>::iterator it, it1;
-int key;
-cout << "Enter key";
-cin >> key;
-it = nums.lower_bound(key);//ищет первое вхождение ключа и возвращает итератор
-it1 = nums.upper_bound(key);//ищет последнее вхождение ключа и возвращает итератор
-//если первое вхождение ключа не найдено - выходим
-if (it == nums.end())
+void ListOfBusesByRout(std::multimap<size_t, Route> container, int rout)
 {
-	cout << "No such key\n";
-	return 0;
+	std::multimap<size_t, Route>::iterator it, it1;
+	
+	
+	it = container.lower_bound(rout);//ищет первое вхождение ключа и возвращает итератор
+	it1 = container.upper_bound(rout);//ищет последнее вхождение ключа и возвращает итератор
+	//если первое вхождение ключа не найдено - выходим
+	if (it == container.end())
+	{
+		cout << "No such key\n";
+		return;
+	}
+	std::copy(it, it1, std::ostream_iterator<std::pair<size_t, Route>>(cout, " "));
+
+
 }
-std::copy(it, it1, std::ostream_iterator<std::pair<int, string>>(cout, " "));
- }
- break;
+void DeleteByRout(std::multimap<size_t, Route> &container,const int rout)
+{
+	container.erase(rout);
+}
